@@ -120,8 +120,7 @@ is wrong".
 
 ## Cheatsheets
 
-You may consult the module cheatsheets during this exam. The relevant sheets
-for Exam A are **weeks 3, 4, 5, 6, and 10**. Between them they contain:
+You should make use of the module cheatsheets, lab tasks, and lecture content during this open-book exam. The relevant content is:
 
 - vector magnitude, normalisation, and the dot product (weeks 3, 7)
 - AABB overlap condition using half-extents (week 4)
@@ -129,8 +128,7 @@ for Exam A are **weeks 3, 4, 5, 6, and 10**. Between them they contain:
 - cubic Bezier formula in expanded form (week 6)
 - non-uniform random techniques (week 10)
 
-If you are stuck on a formula, check the cheatsheet **before** attempting to
-derive it from memory under time pressure.
+If you are stuck on a formula, check the cheatsheet **before** attempting to derive it from memory under time pressure.
 
 ## Start here
 
