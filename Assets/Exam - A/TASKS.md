@@ -4,8 +4,9 @@ Read `README.md` in this folder before you start. It describes the scene,
 the stage model, and what visible behaviour to expect as you complete each
 task. This file lists the tasks in order.
 
-You may consult the module cheatsheets for **weeks 3, 4, 5, 6, and 10**
-during the exam. They contain the cubic Bezier formula, AABB overlap
+You should consult the cheat sheets for the module alongside lecture notes and lab tasks to support you during the exam. 
+
+They contain the cubic Bezier formula, AABB overlap
 condition, Newton's second law / Euler integration, dot-product facing
 check, and non-uniform random technique.
 
@@ -28,6 +29,8 @@ tasks combine more concepts. If you get stuck on a task, skip it, attempt
 the next one, and come back — most tasks have only weak dependencies on
 earlier ones (see `README.md` for the dependency list).
 
+Partial marks WILL be awarded for clear attempts that do not compile but demonstrate some understanding, including where students have written comments in the task body to indicate their understanding of the problem and/or potential solution.
+
 ---
 
 ## TASK 1 — `BezierRail.cs` — Evaluate B(t)
@@ -40,15 +43,14 @@ Use:
 - `t` (clamped to `[0,1]` for you)
 - `u = 1 - t` (computed for you)
 
-Formula (week 6 cheatsheet):
+Formula (from the Splines cheatsheet):
 `B(t) = u^3 * P0 + 3 * u^2 * t * P1 + 3 * u * t^2 * P2 + t^3 * P3`
-
-Quick check:
-- `Evaluate(0)` returns `P0`
-- `Evaluate(1)` returns `P3`
 
 Avoid:
 - linearly interpolating between `P0` and `P3` (that ignores `P1`, `P2`)
+
+Hint:
+- How do you write u^3 (u to the power of 3) in code? Check the cheatsheet for unity code for various mathematical operations.
 
 ---
 
@@ -74,6 +76,9 @@ Avoid:
 - treating `t` as world-space distance or arc length
 - editing the two "commit motion" lines below the TASK 2 block
 
+Hint:
+- what's the operation in code called to linearly interpolate (smoothly move) between two values?
+
 ---
 
 ## TASK 3 — `DroneRailFollower.cs` — Tangent direction by finite difference
@@ -84,11 +89,13 @@ Compute the drone's forward direction from the curve tangent.
 Use:
 - `currentRail.Evaluate(t)`
 - `currentRail.Evaluate(t + eps)` with a small positive `eps` (for example `0.001f`)
-- vector subtraction and `.normalized`
+- vector subtraction and `.normalized` 
 - the `forward` field (`Vector2`)
 
 Formula:
-`tangent ≈ B(t + eps) - B(t)`, then `forward = tangent.normalized`.
+tangent = B(t + eps) - B(t)
+then 
+forward = normalized tangent
 
 Quick check:
 - on a straight rail, forward points along the rail
@@ -97,6 +104,11 @@ Quick check:
 Avoid:
 - using the direction to the dock or to world origin
 - pointing the drone at a fixed world axis
+
+Hint:
+'eps' is just short for epsilon, which just means 'a small number', which we arbitrarily set to something really small like 0.001 for example.
+
+Don't overcomplicate this one! If it seems easy, it is. if it seems hard, take another look.
 
 ---
 
@@ -116,9 +128,9 @@ Use:
 - `transform.position` (`Vector3`)
 
 Steps (in this order):
-1. `acceleration = netForce / massKg` (`a = F / m`)
-2. `velocity += acceleration * dt` (`v += a * dt`)
-3. `transform.position += (Vector3)(velocity * dt)` (`p += v * dt`)
+1. `acceleration = netForce / massKg` 
+2. `velocity += acceleration * dt` 
+3. `transform.position += velocity*dt`
 
 Quick check:
 - the yellow square rises from the bottom-left, slows, falls back, and loops
@@ -148,6 +160,9 @@ Quick check:
 Avoid:
 - always picking `outgoingRails[0]` (that's the placeholder)
 - picking the highest cost (this is minimum selection, not maximum)
+
+Hint:
+Each rail has a CostToGoal field, how do you access its value for this?
 
 ---
 
@@ -184,7 +199,7 @@ Goal:
 Return `true` when two axis-aligned boxes overlap, otherwise `false`.
 
 Use:
-- `aCenter`, `aSize`, `bCenter`, `bSize`
+- `aCenter`, `aSize`, `bCenter`, `bSize`o
 - half-extents: `halfA = aSize * 0.5`, `halfB = bSize * 0.5`
 - `Mathf.Abs(...)`
 
